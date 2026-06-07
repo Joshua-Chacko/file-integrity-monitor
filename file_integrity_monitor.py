@@ -24,14 +24,13 @@ def baseline_check(file: dict, filename:str):
         
 def baseline(file: dict):
     try:
-        with open('baseline.json', 'r+') as f:
+        with open('baseline.json', 'r') as f:
             data = json.load(f)
-            with open('baseline.json', 'w') as f:
-                data.update(file)
-                json.dump(data, f, indent=4)
+        data.update(file)
     except FileNotFoundError:
-        with open('baseline.json', 'w') as f:
-            json.dump(file, f, indent=4)
+        data = file
+    with open('baseline.json', 'w') as f:
+        json.dump(data, f, indent=4)
     
 def integrity_check(file: dict, filename: str):
     value = False
